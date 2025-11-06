@@ -7,7 +7,7 @@ const express = require('express');
 // create LINE SDK config from env variables
 const config = {
   channelSecret: process.env.channelSecret,
-  channelAccessToken: process.env.channelSecret
+  channelAccessToken: process.env.channelAccessToken
 };
 
 // create LINE SDK client
@@ -68,6 +68,7 @@ function handleEvent(event) {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
+  updateWebhookUrl();
 });
 
 const axios = require('axios');  // 引入 axios
@@ -77,7 +78,18 @@ async function updateWebhookUrl() {
     console.log('嘗試獲取 ngrok URL...');
     const ngrokApiUrl = 'http://localhost:4040/api/tunnels';
     const ngrokResponse = await axios.get(ngrokApiUrl);
+
+    if (!ngrokResponse.data.tunnels || ngrokResponse.data.tunnels.length === 0) {
+      console.error('無法取得 ngrok tunnels，請確認 ngrok 是否啟動');
+      return;
+    }
+
     const ngrokUrl = ngrokResponse.data.tunnels[0].public_url;
+
+    if (!ngrokUrl) {
+      console.error('ngrok URL 取得為空，請確認 ngrok 是否正常運作');
+      return;
+    }
 
     console.log('取得 ngrok URL:', ngrokUrl);
 
@@ -106,5 +118,3 @@ async function updateWebhookUrl() {
     }
   }
 }
-
-updateWebhookUrl();
