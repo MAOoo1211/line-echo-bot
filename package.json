@@ -1,0 +1,19 @@
+{
+  "name": "echo-bot",
+  "version": "0.0.0",
+  "description": "An example LINE bot just to echo messages written in CommonJS",
+  "main": "index.js",
+  "scripts": {
+    "build-sdk": "cd ../../; npm i; npm run build",
+    "start": "node ."
+  },
+  "dependencies": {
+    "@line/bot-sdk": "^7.7.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
