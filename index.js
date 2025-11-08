@@ -60,7 +60,7 @@ async function handleEvent(event) {
   else if (userMessage.match(/位置|地址|導航|location/i)) {
     reply = {
       type: "location",
-      title: "金品複合式早點",
+      title: "金品早午餐",
       address: "嘉義縣民雄鄉頂崙村15鄰崙子頂104號之102（東榮國小旁）",
       latitude: 23.557404,
       longitude: 120.435883,
@@ -101,6 +101,7 @@ async function handleEvent(event) {
                 label: "📲 直接撥打",
                 uri: "tel:052060286",
               },
+              margin: "sm"
             },
           ],
         },
