@@ -17,7 +17,7 @@ const client = new line.Client(config);
 // about Express itself: https://expressjs.com/
 const app = express();
 
-// Health check
+// Health check (can remove)
 app.get('/', (req, res) => res.send('LINE Bot is running 🚀'));
 
 // register a webhook handler with middleware
@@ -57,9 +57,9 @@ async function handleEvent(event) {
     reply = {
       type: "location",
       title: "金品早午餐",
-      address: "621嘉義縣民雄鄉頂崙村崙子頂104-102 (東榮國小旁)",
-      latitude: 23.5576638,
-      longitude: 120.4352089
+      address: "嘉義縣民雄鄉頂崙村15鄰崙子頂104號之102 (東榮國小旁)",
+      latitude: 23.557404,
+      longitude: 120.435883
     };
   } 
   // phone
@@ -80,7 +80,7 @@ async function handleEvent(event) {
             { type: "text", text: "⏰ 營業時間", weight: "bold", size: "xl" },
             { type: "text", text: "每日：05:30 - 13:30\n每週二公休", margin: "md" },
             { type: "separator", margin: "md" },
-            { type: "text", text: "📍 嘉義縣民雄鄉頂崙村崙子頂104-102（東榮國小旁）", wrap: true, color: "#555555" }
+            { type: "text", text: "📍 嘉義縣民雄鄉頂崙村15鄰崙子頂104號之102（東榮國小旁）", wrap: true, color: "#555555", margin: "md" }
           ]
         }
       }
