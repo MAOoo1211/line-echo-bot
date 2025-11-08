@@ -44,19 +44,92 @@ function handleEvent(event) {
 
   const userMessage = event.message.text;
 
+  // menu
   if (userMessage.includes("菜單")) {
     return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: "🥪 這是我們的最新菜單：https://lh3.googleusercontent.com/geougc-cs/AMBA38srtR3oP6E5elpULxHMkam9t_zj1hJo0Y5WhWwrD0c8B6i4OGa4REU2G3hehCNmQZ8S9keubg9SrcKsOt8ErXJ4WZuKaWx5r4gFB2wlBNJMTQjmUWw8dYr_Bhout-HwPMmRKGVuiThqNNgt=w734-h538-p",
+      type: "image",
+      originalContentUrl: "https://lh3.googleusercontent.com/geougc-cs/AMBA38srtR3oP6E5elpULxHMkam9t_zj1hJo0Y5WhWwrD0c8B6i4OGa4REU2G3hehCNmQZ8S9keubg9SrcKsOt8ErXJ4WZuKaWx5r4gFB2wlBNJMTQjmUWw8dYr_Bhout-HwPMmRKGVuiThqNNgt=w734-h538-p",
+      previewImageUrl: "https://lh3.googleusercontent.com/geougc-cs/AMBA38srtR3oP6E5elpULxHMkam9t_zj1hJo0Y5WhWwrD0c8B6i4OGa4REU2G3hehCNmQZ8S9keubg9SrcKsOt8ErXJ4WZuKaWx5r4gFB2wlBNJMTQjmUWw8dYr_Bhout-HwPMmRKGVuiThqNNgt=w734-h538-p"
     });
   }
 
-  if (userMessage.includes("地址")) {
+
+  // location 
+  if (userMessage.includes("店家位置") || userMessage.includes("地址") || userMessage.includes("導航") || userMessage.includes("位置") || userMessage.includes("location")) {
     return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: "📍 621嘉義縣民雄鄉東榮路",
+      type: "location",
+      title: "金品早午餐",
+      address: "621嘉義縣民雄鄉頂崙村崙子頂104-102 (東榮國小旁)",
+      latitude: 23.5576638,
+      longitude: 120.4352089
     });
   }
+  
+  // phone
+  if (
+    userMessage.includes("電話") ||
+    userMessage.includes("聯絡") ||
+    userMessage.includes("訂餐")
+  ) {
+    return client.replyMessage(event.replyToken, {
+      type: "text",
+      text: "📞 聯絡電話：05-2060286"
+    });
+  }
+
+  // time
+  if (
+    userMessage.includes("營業時間") ||
+    userMessage.includes("開幾點") ||
+    userMessage.includes("幾點關") || 
+    userMessage.includes("營業中嗎") || 
+    userMessage.includes("休息嗎")
+  ) {
+    return client.replyMessage(event.replyToken, {
+      type: "flex",
+      altText: "營業時間資訊",
+      contents: {
+        type: "bubble",
+        hero: {
+          type: "image",
+          url: "https://example.com/your_store_image.jpg",
+          size: "full",
+          aspectRatio: "20:13",
+          aspectMode: "cover"
+        },
+        body: {
+          type: "box",
+          layout: "vertical",
+          contents: [
+            {
+              type: "text",
+              text: "⏰ 營業時間",
+              weight: "bold",
+              size: "xl"
+            },
+            {
+              type: "text",
+              text: "每日：05:30 - 13:30\n每週二公休",
+              margin: "md",
+              size: "md"
+            },
+            {
+              type: "separator",
+              margin: "md"
+            },
+            {
+              type: "text",
+              text: "📍 嘉義縣民雄鄉頂崙村崙子頂104-102（東榮國小旁）",
+              wrap: true,
+              color: "#555555",
+              margin: "md"
+            }
+          ]
+        }
+      }
+    });
+  }
+
 
   return client.replyMessage(event.replyToken, {
     type: "text",
